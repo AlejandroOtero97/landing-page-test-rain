@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
     let currentSection = 'home';
+    let isAnimating = false; // Flag para controlar la animación
+    const ANIMATION_DURATION = 500; // Duración de la animación en ms
 
     function wrapLettersInSpans(element) {
         const text = element.textContent;
@@ -16,7 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function switchSection(sectionId) {
-        if (currentSection === sectionId) return;
+        // Prevenir cambios si hay una animación en curso
+        if (isAnimating || currentSection === sectionId) return;
+        
+        // Activar el flag de animación
+        isAnimating = true;
 
         const oldSection = document.getElementById(currentSection);
         const newSection = document.getElementById(sectionId);
@@ -57,8 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 newSection.style.opacity = '1';
                 newSection.classList.add('active');
                 currentSection = sectionId;
+                
+                // Desactivar el flag de animación después de completar todo
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 100); // Pequeño buffer adicional
             });
-        }, 500);
+        }, ANIMATION_DURATION);
 
         // Actualizar navegación
         navLinks.forEach(link => {
