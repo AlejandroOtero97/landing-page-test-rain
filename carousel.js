@@ -3,42 +3,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.section');
     let currentSection = 'home';
 
+    function wrapLettersInSpans(element) {
+        const text = element.textContent;
+        element.textContent = '';
+        return [...text].map((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.animationDelay = `${Math.random() * 0.3}s`;
+            element.appendChild(span);
+            return span;
+        });
+    }
+
     function switchSection(sectionId) {
         if (currentSection === sectionId) return;
 
-        // Remove active class from current section and add exit animation
         const oldSection = document.getElementById(currentSection);
+        const newSection = document.getElementById(sectionId);
+
+        // Ocultar inmediatamente la nueva sección mientras se prepara
+        newSection.style.visibility = 'hidden';
+        newSection.style.opacity = '0';
+        newSection.classList.remove('active');
+
+        // Preparar la sección actual para la animación
+        const textElements = oldSection.querySelectorAll('h1, p');
+        textElements.forEach(el => wrapLettersInSpans(el));
+
+        // Iniciar animación de salida
         oldSection.classList.remove('active');
         oldSection.classList.add('exit');
 
-        // Reset new section position
-        const newSection = document.getElementById(sectionId);
-        newSection.style.transition = 'none';
-        newSection.classList.remove('exit');
-        newSection.classList.remove('active');
-        
-        // Force reflow
-        void newSection.offsetWidth;
-        
-        // Re-enable transition and activate new section
-        newSection.style.transition = '';
-        newSection.classList.add('active');
-
-        // Update current section
-        currentSection = sectionId;
-
-        // Update active nav link
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-            }
-        });
-
-        // Cleanup old section after animation
+        // Ocultar la sección anterior antes de que termine la animación
         setTimeout(() => {
+            oldSection.style.visibility = 'hidden';
+        }, 450); // Ligeramente antes de que termine la animación
+
+        // Esperar a que terminen las animaciones de caída
+        setTimeout(() => {
+            // Limpiar la sección anterior
             oldSection.classList.remove('exit');
+            oldSection.style.opacity = '0';
+            
+            // Restaurar contenido original
+            textElements.forEach(el => {
+                const originalText = [...el.querySelectorAll('span')].map(span => span.textContent).join('');
+                el.textContent = originalText;
+            });
+
+            // Mostrar nueva sección
+            requestAnimationFrame(() => {
+                newSection.style.visibility = 'visible';
+                newSection.style.opacity = '1';
+                newSection.classList.add('active');
+                currentSection = sectionId;
+            });
         }, 500);
+
+        // Actualizar navegación
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+        });
     }
 
     // Add click event listeners to nav links
