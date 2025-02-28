@@ -51,8 +51,6 @@ class Splash {
 class RainDrop {
     constructor() {
         this.reset();
-        this.deflectionForce = 0;
-        this.deflectionAngle = 0;
     }
 
     reset() {
@@ -62,46 +60,12 @@ class RainDrop {
         this.length = Math.floor(Math.random() * 15 + 5) * pixelSize;
         this.color = dropColors[Math.floor(Math.random() * dropColors.length)];
         this.hasSplashed = false;
-        this.deflectionForce = 0;
-        this.deflectionAngle = 0;
-    }
-
-    calculateDeflection(containerRect) {
-        const distanceX = this.x - (containerRect.left + containerRect.width / 2);
-        const distanceY = this.y - (containerRect.top + containerRect.height / 2);
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        const influenceRadius = 200; // Radio de influencia
-        
-        if (distance < influenceRadius) {
-            // Calcular fuerza de deflexión basada en la distancia
-            this.deflectionForce = 1 - (distance / influenceRadius);
-            
-            // Añadir variación aleatoria al ángulo de deflexión
-            this.deflectionAngle = Math.atan2(distanceY, distanceX) + 
-                                 (Math.random() - 0.5) * Math.PI * 0.5;
-            
-            // Aplicar movimiento fluido
-            const deflectionX = Math.cos(this.deflectionAngle) * this.deflectionForce * 5;
-            const deflectionY = Math.abs(Math.sin(this.deflectionAngle)) * this.deflectionForce * 2;
-            
-            this.x += deflectionX;
-            this.speed *= (1 - deflectionY * 0.1); // Reducir velocidad gradualmente
-        } else {
-            this.deflectionForce *= 0.95; // Reducir gradualmente la fuerza de deflexión
-        }
     }
 
     update() {
         this.y += this.speed * pixelSize;
-        
-        // Obtener el contenedor activo
-        const activeSection = document.querySelector('.section.active');
-        if (activeSection) {
-            const containerRect = activeSection.getBoundingClientRect();
-            this.calculateDeflection(containerRect);
-        }
 
-        // Resto del código de colisiones con el footer
+        // Solo verificar colisión con el footer
         const footerElement = document.querySelector('.footer');
         if (footerElement) {
             const footerTop = window.innerHeight - footerElement.offsetHeight;
@@ -118,28 +82,20 @@ class RainDrop {
     }
 
     draw() {
-        // Modificar el dibujo para incluir curvatura basada en la deflexión
+        // Dibujar gotas como líneas rectas simples
         const gradient = ctx.createLinearGradient(
             this.x, 
             this.y, 
-            this.x + (this.deflectionForce * 3), 
+            this.x, 
             this.y + this.length
         );
         
         gradient.addColorStop(0, this.color);
         gradient.addColorStop(1, 'transparent');
 
-        ctx.fillStyle = gradient;
-        
-        // Dibujar gota con curvatura
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
-        ctx.quadraticCurveTo(
-            this.x + (this.deflectionForce * 5),
-            this.y + this.length/2,
-            this.x + (this.deflectionForce * 3),
-            this.y + this.length
-        );
+        ctx.lineTo(this.x, this.y + this.length);
         ctx.lineWidth = pixelSize;
         ctx.strokeStyle = gradient;
         ctx.stroke();
