@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Mundo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="flash-overlay flashit"></div>
+    <canvas id="rainCanvas"></canvas>
+    <canvas id="lightningCanvas"></canvas>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">AO</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">Sobre Mi</a>
+                <a href="#contact" class="nav-link">Contacto</a>
+                <a href="#info" class="nav-link">Informacion</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="sectionContainer">
+        <div id="home" class="section active">
+            <h1>Bienvenido</h1>
+            <p class="description">Soy Alejandro Otero un front end developer de Argentina, con experiencia en desarrollo y mantenimiento web.</p>
+        </div>
+        <div id="about" class="section">
+            <h1>Sobre Mi</h1>
+            <p>Frontend developer con experiencia en React, Next.js y Css.</p>
+        </div>
+        <div id="contact" class="section">
+            <h1>Contacto</h1>
+            <p>Email: locolajefa@gmail.com</p>
+            <p>GitHub: <a href="https://github.com/AlejandroOtero97">Mi Github</a></p>
+            <p>Phone: 11-4058-8867</p>
+        </div>
+        <div id="info" class="section">
+            <h1>Informacion</h1>
+            <p>Tengo 27 años, vivo en Argentina y llevo una vida activa mientras equilibro mi pasión por la programación.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>by Alejandro Otero 2025 | Frontend Test</p>
+        </div>
+    </footer>
+    <script src="rain.js"></script>
+    <script src="lightning.js"></script>
+    <script>
+        const lightningCanvas = document.getElementById('lightningCanvas');
+        const lightning = new Lightning(lightningCanvas);
+        lightning.start(); // Los rayos comenzarán desactivados
+        // Para activarlos después, usar: lightning.toggle();
+    </script>
+    <script src="carousel.js"></script>
+</body>
+</html>
