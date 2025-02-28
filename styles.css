@@ -295,6 +295,28 @@ h1 {
     to { opacity: 0; }
 }
 
+.persistent-link {
+    color: #00ffff;
+    text-decoration: none;
+    font-size: 1.4rem;
+    transition: text-shadow 0.3s ease;
+}
+
+.persistent-link:hover {
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.contact-whatsapp {
+    margin-top: 0.5rem;
+}
+
 /* Ajustes generales para mobile */
 @media screen and (max-width: 768px) {
     .container {
