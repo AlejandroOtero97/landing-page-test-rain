@@ -34,8 +34,14 @@
 
     <div class="container" id="sectionContainer">
         <div id="home" class="section active">
-            <div class="avatar-container">
-                <img src="images/avatar.png" alt="Avatar" class="avatar-image">
+            <div class="avatar-wrapper">
+                <div class="npc-alert">!</div>
+                <div class="speech-bubble" data-dialog="0">¡Hola! Soy Ale</div>
+                <div class="speech-bubble" data-dialog="1">¿Cómo estás?</div>
+                <div class="speech-bubble" data-dialog="2">No tengo más diálogo</div>
+                <div class="avatar-container">
+                    <img src="images/avatar.png" alt="Avatar" class="avatar-image">
+                </div>
             </div>
             <h1>Bienvenido</h1>
             <p class="description">Soy Alejandro Otero un front end developer de Argentina, con experiencia en desarrollo y mantenimiento web.</p>
@@ -95,6 +101,48 @@
             link.addEventListener('click', () => {
                 document.querySelector('.nav-links').classList.remove('show');
             });
+        });
+
+        // Sistema de diálogos mejorado
+        let currentDialog = 0;
+        let isAnimating = false;
+
+        document.querySelector('.avatar-container').addEventListener('click', async function() {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const npcAlert = document.querySelector('.npc-alert');
+            const speechBubbles = document.querySelectorAll('.speech-bubble');
+            
+            // Ocultar todos los diálogos
+            speechBubbles.forEach(bubble => {
+                bubble.classList.remove('show');
+                bubble.style.display = 'none';
+            });
+            
+            // Resetear contador si llega al final
+            if (currentDialog >= speechBubbles.length) {
+                currentDialog = 0;
+            }
+            
+            // Mostrar signo de exclamación
+            npcAlert.classList.remove('show');
+            void npcAlert.offsetWidth; // Forzar reflow
+            npcAlert.classList.add('show');
+            
+            // Esperar a que aparezca el signo
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            // Mostrar burbuja de diálogo
+            speechBubbles[currentDialog].style.display = 'block';
+            void speechBubbles[currentDialog].offsetWidth; // Forzar reflow
+            speechBubbles[currentDialog].classList.add('show');
+            
+            // Esperar a que termine la animación
+            setTimeout(() => {
+                isAnimating = false;
+                currentDialog++;
+            }, 1500);
         });
     </script>
 </body>
