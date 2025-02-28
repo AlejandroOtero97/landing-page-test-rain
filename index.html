@@ -54,13 +54,26 @@
         </div>
     </footer>
     <script src="rain.js"></script>
-    <script src="lightning.js"></script>
-    <script>
-        const lightningCanvas = document.getElementById('lightningCanvas');
-        const lightning = new Lightning(lightningCanvas);
-        lightning.start(); // Los rayos comenzarán desactivados
-        // Para activarlos después, usar: lightning.toggle();
-    </script>
     <script src="carousel.js"></script>
+    <script>
+        // Control de la animación inicial del flash
+        window.addEventListener('load', () => {
+            const flashOverlay = document.querySelector('.flash-overlay');
+            
+            // Removemos temporalmente la clase flashit
+            flashOverlay.classList.remove('flashit');
+            
+            // Ejecutamos un flash inicial después de 1 segundo
+            setTimeout(() => {
+                flashOverlay.style.animation = 'flash 2s ease-out';
+                
+                // Después del flash inicial, restauramos el comportamiento normal
+                setTimeout(() => {
+                    flashOverlay.style.animation = '';
+                    flashOverlay.classList.add('flashit');
+                }, 2000);
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
