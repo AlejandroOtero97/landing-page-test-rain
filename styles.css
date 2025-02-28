@@ -377,15 +377,6 @@ h1 {
         padding: 20px;
     }
 
-    .section h1 {
-        font-size: 38px;
-    }
-
-    .section p {
-        font-size: 22px;
-        line-height: 1.5;
-    }
-
     /* Navbar mobile */
     .navbar {
         position: fixed;
