@@ -18,6 +18,11 @@
     <nav class="navbar">
         <div class="nav-content">
             <a href="#" class="nav-logo">AO</a>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <div class="nav-links">
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">Sobre Mi</a>
@@ -73,6 +78,18 @@
                     flashOverlay.classList.add('flashit');
                 }, 2000);
             }, 1000);
+        });
+
+        // Agregar funcionalidad al menú hamburguesa
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('show');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('show');
+            });
         });
     </script>
 </body>
