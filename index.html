@@ -14,7 +14,9 @@
 </head>
 <body>
     <div class="background-sections">
-        <div class="bg-section" id="section1"></div>
+        <div class="bg-section" id="section1">
+            <canvas id="meteorCanvas"></canvas>
+        </div>
         <div class="bg-section" id="section2"></div>
         <div class="bg-section" id="section3">
             <canvas id="leavesCanvas"></canvas>
@@ -82,6 +84,7 @@
     <script src="rain.js"></script>
     <script src="carousel.js"></script>
     <script src="js/leaves.js"></script>
+    <script src="js/meteors.js"></script>
     <script>
         // Control de la animación inicial del flash
         window.addEventListener('load', () => {
