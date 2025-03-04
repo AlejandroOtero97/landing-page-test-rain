@@ -153,8 +153,14 @@ function animate() {
 }
 
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    resizeCanvas();
 });
 
+function resizeCanvas() {
+    const section = document.getElementById('section4');
+    canvas.width = section.offsetWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
 animate();

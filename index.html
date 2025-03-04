@@ -10,11 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
-    <div class="flash-overlay flashit"></div>
-    <canvas id="rainCanvas"></canvas>
-    <canvas id="lightningCanvas"></canvas>
+    <div class="background-sections">
+        <div class="bg-section" id="section1"></div>
+        <div class="bg-section" id="section2"></div>
+        <div class="bg-section" id="section3">
+            <canvas id="leavesCanvas"></canvas>
+        </div>
+        <div class="bg-section" id="section4">
+            <div class="flash-overlay flashit"></div>
+            <canvas id="rainCanvas"></canvas>
+            <canvas id="lightningCanvas"></canvas>
+        </div>
+    </div>
     <nav class="navbar">
         <div class="nav-content">
             <a href="#" class="nav-logo">AO</a>
@@ -71,6 +81,7 @@
     </footer>
     <script src="rain.js"></script>
     <script src="carousel.js"></script>
+    <script src="js/leaves.js"></script>
     <script>
         // Control de la animación inicial del flash
         window.addEventListener('load', () => {

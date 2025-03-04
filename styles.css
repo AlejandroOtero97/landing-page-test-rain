@@ -7,36 +7,62 @@ body {
 }
 
 #rainCanvas {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;  /* Cambiado de 1 a 0 */
 }
 
 #lightningCanvas {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     pointer-events: none;
 }
 
-.navbar {
-    position: fixed;
+#leavesCanvas {
+    position: absolute;
     top: 0;
+    left: 0; /* Cambiado de 75% a 0 */
+    width: 100%; /* Cambiado de 25% a 100% */
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.navbar {
+    position: fixed; /* Changed from relative to fixed */
+    top: 0;
+    left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
+    background: rgb(0, 0, 0);
+    z-index: 100;
     border-bottom: 2px solid #00ffff;
 }
 
 .nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
+    width: 100%; /* Added width */
+    padding: 1rem 2rem; /* Añadido padding horizontal */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap; /* Asegura que los enlaces permanezcan en una línea */
+    margin-left: auto; /* Empuja los enlaces hacia la derecha */
+    max-width: 70%; /* Limita el ancho para dejar espacio al logo */
 }
 
 .nav-logo {
@@ -50,10 +76,11 @@ body {
 .nav-links a {
     color: #00ffff;
     text-decoration: none;
-    margin-left: 2rem;
+    margin-left: 1.5rem; /* Reducido de 2rem */
     font-family: 'Orbitron', sans-serif;
     font-size: 0.8rem;
     font-weight: 700;
+    white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
 }
 
 .nav-links a:hover {
@@ -61,13 +88,13 @@ body {
 }
 
 .footer {
-    position: fixed;
+    position: fixed; /* Cambiado de relative a fixed */
     bottom: 0;
     left: 0;  /* Añadido */
     width: 100%;
     background: rgba(0, 0, 0, 0.9);  /* Un poco más opaco */
     border-top: 2px solid #00ffff;
-    z-index: 1000;  /* Mismo z-index que navbar */
+    z-index: 100;  /* Mismo z-index que navbar */
 }
 
 .footer-content {
@@ -96,14 +123,17 @@ body {
 
 .container {
     position: relative;
-    z-index: 2;
-    height: 75vh;
-    overflow: hidden;
+    z-index: 1;
+    min-height: calc(100vh - 120px); /* Ajustado para considerar navbar y footer */
+    padding-top: 80px; /* Aumentado padding superior e inferior */
+    padding-bottom: 80px; /* Aumentado padding superior e inferior */
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Previene scroll horizontal */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 60px; /* Espacio para la navbar */
-    padding-bottom: 60px; /* Espacio para el footer */
 }
 
 .content {
@@ -134,6 +164,9 @@ body {
     left: 0;
     right: 0;
     margin: 0 auto;
+    box-sizing: border-box; /* Asegura que el padding no añada al ancho */
+    word-wrap: break-word; /* Evita que el texto se desborde */
+    overflow-wrap: break-word;
 }
 
 .section.active {
@@ -176,7 +209,9 @@ body {
 
 .section p {
     width: 100%;
-    max-width: 800px;
+    max-width: 100%; /* Asegura que el texto no se desborde */
+    box-sizing: border-box;
+    padding: 0 1rem;
     color: #00ffff;
     font-size: 1.4rem;
     line-height: 1.8;
@@ -259,7 +294,7 @@ h1 {
 }
 
 .flash-overlay {
-    position: fixed;
+    position: absolute; /* Changed from fixed to absolute */
     top: 0;
     left: 0;
     width: 100%;
@@ -320,7 +355,7 @@ h1 {
 /* Ajustes generales para mobile */
 @media screen and (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 60px 10px;
         margin-top: 60px;
         width: 100%;
         box-sizing: border-box;
@@ -336,7 +371,8 @@ h1 {
     }
 
     .section h1 {
-        font-size: 28px;
+        font-size: 2rem; /* Reducido tamaño de título */
+        word-wrap: break-word;
         width: 100%;
         margin: 0 0 20px 0;
         padding: 0 10px;
@@ -345,7 +381,8 @@ h1 {
     }
 
     .section p {
-        font-size: 16px;
+        font-size: 1rem;
+        padding: 0 0.5rem;
         line-height: 1.5;
         width: 100%;
         margin: 0 0 15px 0;
@@ -395,7 +432,7 @@ h1 {
 
     .nav-content {
         flex-direction: column;
-        padding: 10px;
+        padding: 1rem;
     }
 
     .nav-links {
@@ -404,10 +441,20 @@ h1 {
         flex-direction: column;
         background: rgba(0, 0, 0, 0.9);
         padding: 10px 0;
+        max-width: 100%;
     }
 
     .nav-links.show {
         display: flex;
+    }
+
+    .nav-links a {
+        margin-left: 1rem; /* Reducido el espacio entre links */
+        margin: 0;
+        padding: 0.8rem;
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
     }
 
     .nav-link {
@@ -423,6 +470,7 @@ h1 {
         top: 15px;
         right: 20px;
         cursor: pointer;
+        margin-right: 1rem; /* Añade un poco de espacio a la derecha */
     }
 
     .hamburger div {
@@ -705,4 +753,53 @@ h1 {
     .avatar-wrapper {
         padding-top: 50px; /* Menos espacio en mobile */
     }
+}
+
+.background-sections {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: flex;
+}
+
+.bg-section {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#section1 {
+    background-image: url('./images/space.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+}
+
+#section2 {
+    background-image: url('./images/forest.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+}
+
+#section3 {
+    background-image: url('./images/arbol.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7; /* Para que la imagen no sea demasiado dominante */
+}
+
+#section4 {
+    background-image: url('./images/city.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
 }
