@@ -7,9 +7,16 @@ class Leaf {
         this.rotationSpeed = (Math.random() - 0.5) * 0.02;
         this.image = new Image();
         this.image.src = './images/leaf.png'; // Asegúrate de tener esta imagen
+        this.accumulated = false;
+        this.accumulationTime = 0;
+        this.maxAccumulationTime = Math.random() * 9000 + 4000; // 1-3 segundos
+        this.opacity = 1;
     }
 
     reset() {
+        this.accumulated = false;
+        this.accumulationTime = 0;
+        this.opacity = 1;
         this.x = Math.random() * this.canvas.width;
         this.y = -20;
         this.speed = Math.random() * 1 + 0.5;
@@ -18,18 +25,31 @@ class Leaf {
     }
 
     update() {
+        if (this.accumulated) {
+            this.accumulationTime += 16; // ~16ms por frame
+            if (this.accumulationTime >= this.maxAccumulationTime) {
+                this.opacity -= 0.02;
+                if (this.opacity <= 0) {
+                    this.reset();
+                }
+            }
+            return;
+        }
+
         this.y += this.speed;
         this.x += Math.sin(this.swing) * 0.5;
         this.swing += this.swingSpeed;
         this.rotation += this.rotationSpeed;
 
-        if (this.y > this.canvas.height) {
-            this.reset();
+        if (this.y > this.canvas.height - this.size/2) {
+            this.y = this.canvas.height - this.size/2;
+            this.accumulated = true;
         }
     }
 
     draw(ctx) {
         ctx.save();
+        ctx.globalAlpha = this.opacity;
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
         ctx.drawImage(
@@ -77,7 +97,7 @@ class LeavesAnimation {
     }
 
     initLeaves() {
-        const numberOfLeaves = 20;
+        const numberOfLeaves = 40;
         for (let i = 0; i < numberOfLeaves; i++) {
             this.leaves.push(new Leaf(this.canvas));
         }

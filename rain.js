@@ -65,14 +65,11 @@ class RainDrop {
     update() {
         this.y += this.speed * pixelSize;
 
-        // Solo verificar colisión con el footer
-        const footerElement = document.querySelector('.footer');
-        if (footerElement) {
-            const footerTop = window.innerHeight - footerElement.offsetHeight;
-            if (this.y > footerTop && !this.hasSplashed) {
-                this.hasSplashed = true;
-                return new Splash(this.x, footerTop);
-            }
+        // Verificar colisión con el final de la sección visible
+        const splashHeight = canvas.height - 0; // 60px antes del final
+        if (this.y > splashHeight && !this.hasSplashed) {
+            this.hasSplashed = true;
+            return new Splash(this.x, splashHeight);
         }
         
         if (this.y > canvas.height) {
@@ -153,14 +150,8 @@ function animate() {
 }
 
 window.addEventListener('resize', () => {
-    resizeCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 });
 
-function resizeCanvas() {
-    const section = document.getElementById('section4');
-    canvas.width = section.offsetWidth;
-    canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
 animate();
