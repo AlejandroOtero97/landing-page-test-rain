@@ -2,7 +2,7 @@ class Leaf {
     constructor(canvas) {
         this.canvas = canvas;
         this.reset();
-        this.size = Math.random() * 15 + 5; // Tamaño entre 5 y 20
+        this.size = Math.random() * 50 + 25; // Tamaño entre 5 y 20
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.02;
         this.image = new Image();
