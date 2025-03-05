@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Gambetta', sans-serif;
     background-color: #000;
     overflow: hidden;
 }
@@ -216,15 +216,9 @@ body {
     max-width: 100%; /* Asegura que el texto no se desborde */
     box-sizing: border-box;
     padding: 0 1rem;
-    color: #00ffff;
     font-size: 1.4rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
-    color: #e4f3ff;
-    text-shadow: 
-        0 0 10px rgba(0, 0, 0, 0.8),
-        0 0 20px rgba(0, 0, 0, 0.6),
-        0 0 30px rgba(0, 0, 0, 0.4);
     position: relative;
     z-index: 2;
 }
@@ -236,7 +230,6 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     z-index: -1;
     backdrop-filter: blur(3px);
@@ -273,63 +266,27 @@ body {
     height: 100%;
 }
 
-h1, .section h1 {
-    width: 100%;
-    font-size: 3.5rem;
+h1 {
+    font-size: 2rem;
     text-align: center;
     line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.section h1 {
+    width: 100%;
+    font-size: 3.5rem;
     margin-bottom: 2rem;
     position: relative;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: rgb(5, 4, 4);
-    opacity: 1; /* Importante: aseguramos que sea visible */
-    animation: glowText 2s ease-in-out infinite alternate;
-}
-
-.section h1::before,
-.section h1::after {
-    content: attr(data-text);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    animation: glitchText 3s infinite alternate-reverse;
-}
-
-.section h1::before {
-    color: #ff00ff;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    transform: translate(-2px, -2px);
-    opacity: 0.7;
-}
-
-.section h1::after {
-    color: #00ffff;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    transform: translate(2px, 2px);
-    opacity: 0.7;
 }
 
 .description {
-    color: #00ffff;
     font-size: 1.2rem;  /* Aumentado de 0.8rem */
     line-height: 1.8;
-    opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    animation-delay: 1.5s;
     max-width: 800px;   /* Aumentado de 600px */
     margin: 0 auto;
-    color: #e4f3ff;
-    text-shadow: 
-        0 0 10px rgba(0, 0, 0, 0.8),
-        0 0 20px rgba(0, 0, 0, 0.6);
-    background: rgba(0, 0, 0, 0.3);
     padding: 15px;
     border-radius: 8px;
-    backdrop-filter: blur(3px);
 }
 
 @keyframes fadeIn {
@@ -475,8 +432,13 @@ h1, .section h1 {
     }
 
     .section h1 {
-        font-size: 2.5rem;
-        letter-spacing: 2px;
+        font-size: 2rem;
+        word-wrap: break-word;
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 0 10px;
+        box-sizing: border-box;
+        text-align: center;
     }
 
     .section p {
@@ -916,4 +878,58 @@ h1, .section h1 {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 1;
+}
+
+/* Actualizar estilos base para h1 */
+h1, .section h1 {
+    font-size: 80px;
+    text-transform: uppercase;
+    font-family: 'Gambetta', serif;
+    letter-spacing: -3px;
+    font-variation-settings: "wght" 311;
+    margin-bottom: 0.8rem;
+    color: PaleGoldenRod;
+    outline: none;
+    text-align: center;
+    transition: 700ms ease;
+    width: 100%;
+    position: relative;
+}
+
+h1:hover, .section h1:hover {
+    font-variation-settings: "wght" 582; 
+    letter-spacing: 1px;
+}
+
+/* Actualizar estilos base para p */
+.section p, p, .description {
+    font-size: 1.2em;
+    line-height: 150%;
+    text-align: center;
+    color: MintCream;
+    letter-spacing: .5px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Ajustar tamaños para mobile */
+@media screen and (max-width: 768px) {
+    h1, .section h1 {
+        font-size: 60px; /* Reducido para mobile */
+        letter-spacing: -1.5px;
+    }
+
+    .section p, p, .description {
+        font-size: 1em;
+        line-height: 140%;
+    }
+
+    h1:hover, .section h1:hover {
+        letter-spacing: 0.5px;
+    }
 }
