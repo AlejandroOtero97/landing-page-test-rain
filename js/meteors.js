@@ -16,7 +16,7 @@ class Meteor {
     }
 
     reset() {
-        this.size = Math.random() * 30 + 10;
+        this.size = Math.random() * 60 + 10;
         // Comenzar desde fuera de la pantalla, en la esquina superior izquierda
         this.x = Math.random() * (meteorCanvas.width * 0.5) - meteorCanvas.width * 0.5;
         this.y = Math.random() * (meteorCanvas.height * 0.5) - meteorCanvas.height * 0.5;
