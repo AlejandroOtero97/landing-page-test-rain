@@ -1,6 +1,49 @@
 const canvas = document.getElementById('rainCanvas');
 const ctx = canvas.getContext('2d');
 
+// ...existing Rain class and related code...
+
+// Flash Effect Controller
+function initFlashEffect() {
+    const flashOverlay = document.querySelector('.flash-overlay');
+    
+    function setupInitialFlash() {
+        // Removemos temporalmente la clase flashit
+        flashOverlay.classList.remove('flashit');
+        
+        // Ejecutamos un flash inicial después de 1 segundo
+        setTimeout(() => {
+            flashOverlay.style.animation = 'flash 2s ease-out';
+            
+            // Después del flash inicial, restauramos el comportamiento normal
+            setTimeout(() => {
+                flashOverlay.style.animation = '';
+                flashOverlay.classList.add('flashit');
+            }, 2000);
+        }, 1000);
+    }
+
+    // Iniciar el efecto cuando la página cargue
+    if (document.readyState === 'loading') {
+        window.addEventListener('load', setupInitialFlash);
+    } else {
+        setupInitialFlash();
+    }
+}
+
+// Initialize both rain and flash effects
+window.addEventListener('load', () => {
+    const rain = new Rain(canvas);
+    animate();
+    initFlashEffect();
+});
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 

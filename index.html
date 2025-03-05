@@ -81,84 +81,11 @@
             <p>by Alejandro Otero 2025 | Frontend Test</p>
         </div>
     </footer>
-    <script src="rain.js"></script>
-    <script src="carousel.js"></script>
+    <script src="js/rain.js"></script>
+    <script src="js/carousel.js"></script>
     <script src="js/leaves.js"></script>
     <script src="js/meteors.js"></script>
-    <script>
-        // Control de la animación inicial del flash
-        window.addEventListener('load', () => {
-            const flashOverlay = document.querySelector('.flash-overlay');
-            
-            // Removemos temporalmente la clase flashit
-            flashOverlay.classList.remove('flashit');
-            
-            // Ejecutamos un flash inicial después de 1 segundo
-            setTimeout(() => {
-                flashOverlay.style.animation = 'flash 2s ease-out';
-                
-                // Después del flash inicial, restauramos el comportamiento normal
-                setTimeout(() => {
-                    flashOverlay.style.animation = '';
-                    flashOverlay.classList.add('flashit');
-                }, 2000);
-            }, 1000);
-        });
-
-        // Agregar funcionalidad al menú hamburguesa
-        document.querySelector('.hamburger').addEventListener('click', () => {
-            document.querySelector('.nav-links').classList.toggle('show');
-        });
-
-        // Cerrar menú al hacer click en un enlace
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('show');
-            });
-        });
-
-        // Sistema de diálogos mejorado
-        let currentDialog = 0;
-        let isAnimating = false;
-
-        document.querySelector('.avatar-container').addEventListener('click', async function() {
-            if (isAnimating) return;
-            isAnimating = true;
-            
-            const npcAlert = document.querySelector('.npc-alert');
-            const speechBubbles = document.querySelectorAll('.speech-bubble');
-            
-            // Ocultar todos los diálogos
-            speechBubbles.forEach(bubble => {
-                bubble.classList.remove('show');
-                bubble.style.display = 'none';
-            });
-            
-            // Resetear contador si llega al final
-            if (currentDialog >= speechBubbles.length) {
-                currentDialog = 0;
-            }
-            
-            // Mostrar signo de exclamación
-            npcAlert.classList.remove('show');
-            void npcAlert.offsetWidth; // Forzar reflow
-            npcAlert.classList.add('show');
-            
-            // Esperar a que aparezca el signo
-            await new Promise(resolve => setTimeout(resolve, 800));
-            
-            // Mostrar burbuja de diálogo
-            speechBubbles[currentDialog].style.display = 'block';
-            void speechBubbles[currentDialog].offsetWidth; // Forzar reflow
-            speechBubbles[currentDialog].classList.add('show');
-            
-            // Esperar a que termine la animación
-            setTimeout(() => {
-                isAnimating = false;
-                currentDialog++;
-            }, 1500);
-        });
-    </script>
     <script src="js/fog.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
