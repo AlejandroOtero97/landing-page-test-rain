@@ -147,6 +147,14 @@ body {
     justify-content: center;
 }
 
+.text-container {
+    background-color: rgba(30, 30, 30, 0.85);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 75%;
+}
+
 .content {
     display: none; /* Ocultamos el contenido duplicado */
 }
@@ -251,7 +259,6 @@ body {
     bottom: 0;
     border-radius: 8px;
     z-index: -1;
-    backdrop-filter: blur(3px);
     margin: -5px -10px;
 }
 
@@ -288,7 +295,7 @@ body {
 h1 {
     font-size: 2rem;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1;
     margin-bottom: 1rem;
 }
 
@@ -916,6 +923,7 @@ h1, .section h1 {
     transition: 700ms ease;
     width: 100%;
     position: relative;
+    margin-top: 20px;
 }
 
 h1:hover, .section h1:hover {
@@ -955,3 +963,4 @@ h1:hover, .section h1:hover {
         letter-spacing: 0.5px;
     }
 }
+
